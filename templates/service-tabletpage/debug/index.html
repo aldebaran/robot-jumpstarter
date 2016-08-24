@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body class="unselectable">
+    <h1>App debug interface!</h1>
+    <p>Pick the robot to use</p>
+    Robot IP:
+    <form name="pickrobot">
+        <input id="robotip" type="text" autofocus="autofocus"></input>
+        <input type="submit" value="Connect!" />
+    </form>
+    <p>The app's page will be displayed as if it was on a tablet connected to that robot</p>
+
+	<!-- javascript -->
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		$(function(){
+            function connect() {
+                var robotIp = $("#robotip").val();
+                if(robotIp) {
+                    $.cookie("robotip", robotIp, { expires : 356 }); // Expires in one year
+                    console.log("Connecting to " + robotIp);
+                    if (window.location.protocol == "file:") {
+                        var projectRoot = window.location.href.split("/debug/index.html")[0];
+                        window.location.href = projectRoot + "/app/html/index.html?robot=" +  robotIp;
+                    } else {
+                        window.location.href = "/app/html/?robot=" +  robotIp;
+                    }
+                }
+            }
+            $("#robotip").val($.cookie("robotip")).select();
+            $("form").submit(function(event) {
+                event.preventDefault();
+                connect();
+            });
+		})
+	</script>
+
+</body>
+</html>

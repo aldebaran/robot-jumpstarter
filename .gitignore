@@ -1,0 +1,12 @@
+*.pyc
+output/*
+
+*.pkg
+
+.DS_Store
+
+*.idea
+.floo
+.flooignore
+
+*/bower_components/*

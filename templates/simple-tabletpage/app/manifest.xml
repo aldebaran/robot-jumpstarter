@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.0.1" uuid="simple-tabletpage">
+ <names>
+  <name lang="en_US">simple-tabletpage</name>
+  <name lang="fr_FR">servicedriven</name>
+ </names>
+ <supportedLanguages>
+  <language>en_US</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">simple-tabletpage</name>
+   </names>
+   <descriptions>
+    <description lang="en_US">Shows a page on the tablet</description>
+   </descriptions>
+   <triggerSentences>
+    <sentence lang="en_US">simple tablet page</sentence>
+    <sentence lang="fr_FR">Lance servicedriven</sentence>
+   </triggerSentences>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.3"/>
+  <robotRequirement/>
+ </requirements>
+ <services>
+  <service name="AppService" execStart="/usr/bin/python2 services/appservice.py" autorun="false"/>
+ </services>
+</package>

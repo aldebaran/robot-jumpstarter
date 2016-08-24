@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Run App Executable" id="19" localization="8" tooltip='Runs an Executable attached to the project (declared with a &quot;&amp;lt;service&amp;gt;&quot; tag in the manifest).' x="260" y="34">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    executable_id = "UNDEFINED"
+    def onLoad(self):
+        self.listener_id = None
+        self.executable_manager = self.session().service("ALServiceManager")
+        executable_name = self.getParameter("Executable Name")
+        if ALProxy("ALSystem").systemVersion() < "2.3":
+            self.executable_id = executable_name
+            if "." not in executable_name:
+                self.logger.info("Warning: You will have conflicts if several packages have executables called '%s'" % executable_name)
+                self.logger.info("Use a newer version of NAOqi to have executables prefixed with the package ID, or prefix it yourself, in the form with <package>.<executable ID>")
+        else:
+            self.executable_id = self.packageUid() + "." + executable_name
+
+    def disconnect(self):
+        try:
+            self.executable_manager.serviceStopped.disconnect(self.listener_id)
+        except Exception as e:
+            pass
+
+    def onUnload(self):
+        self.executable_manager.stopService(self.executable_id)
+        self.disconnect()
+
+    def onInput_onStart(self):
+        self.listener_id = self.executable_manager.serviceStopped.connect(self.onExecutableStopped)
+        if not self.executable_manager.startService(self.executable_id):
+            self.logger.info("Failed to start App Executable '%s', stopping." % repr(self.executable_id))
+            self.onStopped()
+            self.disconnect()
+
+    def onExecutableStopped(self, stopped_executable, reason):
+        if stopped_executable == self.executable_id:
+            self.logger.info("App Executable Stopped: " + self.executable_id)
+            self.onStopped()
+            self.disconnect()
+
+    def onInput_onStop(self):
+        self.onUnload()
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Parameter name="Executable Name" inherits_from_parent="0" content_type="3" value="main" default_value="" custom_choice="0" tooltip="Name of the Executable to run, as declared in the manifest &#x0A;&#x0A;Above version 2.3, the app ID will be automatically added by the system; if you&apos;re with an older NAOqi (e.g. on NAO), it is recommended you give a unique name to avoid conflicts." id="5" />
+                        </Box>
+                        <Link inputowner="19" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="0" indexofinput="4" outputowner="19" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

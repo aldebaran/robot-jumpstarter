@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.0.1" uuid="python-service">
+ <names>
+  <name lang="en_US">python-service</name>
+ </names>
+ <supportedLanguages>
+  <language>en_US</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents/>
+ <requirements>
+  <naoqiRequirement minVersion="2.3"/>
+  <robotRequirement/>
+ </requirements>
+ <services>
+  <service execStart="/usr/bin/python2 scripts/myservice.py" name="myservice" autorun="true"/>
+ </services>
+</package>

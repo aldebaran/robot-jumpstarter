@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.0.1" uuid="dialog-service">
+ <names>
+  <name lang="en_US">dialog-service</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">A simple app consisting of a collaborative dialogue talking to a service.</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="testrun">
+   <nature>interactive</nature>
+   <names/>
+   <descriptions>
+    <description lang="en_US">Launch this to test your collaborative dialog in isolation (easier for debugging)</description>
+   </descriptions>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent topicName="dialog-service" typeVersion="1.0">
+   <topic language="en_US" path="dialog-service/dialog-service_enu.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.3"/>
+  <robotRequirement/>
+ </requirements>
+ <services>
+  <service name="myservice" execStart="/usr/bin/python2 scripts/myservice.py" autorun="true"/>
+ </services>
+</package>

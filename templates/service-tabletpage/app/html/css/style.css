@@ -1,0 +1,54 @@
+* {
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+}
+
+body{
+  margin: 0px;
+  background-color: black;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.levelbutton {
+  border-radius: 25px;
+  display: inline-block;
+  width: 250px;
+  height: 100px;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 50px;
+}
+
+.levelbutton.clicked {
+  background-color: grey;
+}
+
+.levelbutton.clicked.highlighted {
+  background-color: darkblue;
+}
+
+.tabletsized {
+  background-color: lightblue;
+  width: 1280px;
+  height: 800px;
+  position: absolute;
+}
+
+#exit {
+  font-size: 100px;
+  position: absolute;
+  top: 0px;
+  right: 15px;
+}
