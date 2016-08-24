@@ -23,7 +23,7 @@ Making and testing NAOqi apps can be a bit of a pain. In an ideal world:
 
 For example, calling 
 
-`python generate.py pythonapp my-super-app`
+`python jumpstart.py pythonapp my-super-app`
 
 ... will create a new project "my-super-app" containing a copy of the pythonapp template, with all necessary parts renamed.
 
@@ -33,7 +33,7 @@ Creating a project
 
 Projects are created by calling
 
-`python generate.py template-name app-name [service-name] (optional)`
+`python jumpstart.py template-name app-name [service-name] (optional)`
 
 A project with the given name will be created in the "output" folder.
 
@@ -56,7 +56,7 @@ For more details:
 Template: pythonapp
 --------
 
-*Usage:* `python generate.py pythonapp my-app-name`
+*Usage:* `python jumpstart.py pythonapp my-app-name`
 
 An interactive application made as a simple standalone Python script.
 
@@ -76,7 +76,7 @@ Note that this application doesn't register a service in NAOqi.
 Template: python-service
 --------
 
-*Usage:* `python generate.py python-service my-package-name MyServiceName`
+*Usage:* `python jumpstart.py python-service my-package-name MyServiceName`
 
 A NAOqi service that will be running at all times on your robot. 
 
@@ -91,7 +91,7 @@ This project also contains unit tests: run `python testrun.py` in the project ro
 Template: simple-tabletpage
 --------
 
-*Usage:* `python generate.py simple-tabletpage my-package-name`
+*Usage:* `python jumpstart.py simple-tabletpage my-package-name`
 
 This demonstrates a simple way of having a webpage that uses NAOqi services by calling them with QiMessaging.js.
 
@@ -105,7 +105,7 @@ To test the page without installing it on a robot, run `python serve.py` (in the
 Template: service-tabletpage
 --------
 
-*Usage:* `python generate.py service-tabletpage my-package-name MyServiceName`
+*Usage:* `python jumpstart.py service-tabletpage my-package-name MyServiceName`
 
 Combines **python-service** and **simple-tabletpage**  to have an application consisting of a (Python) NAOqi service, and a webpage that calls it (a common pattern in application development).
 
@@ -113,7 +113,7 @@ Combines **python-service** and **simple-tabletpage**  to have an application co
 Template: dialog-service
 --------
 
-*Usage:* `python generate.py service-tabletpage my-package-name MyServiceName`
+*Usage:* `python jumpstart.py service-tabletpage my-package-name MyServiceName`
 
 Works like **python-service**, but with an extra collaborative dialogue file (a qichat file, that can be edited through choregraphe), to show how you can call the service from dialogue.
 
