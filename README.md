@@ -8,7 +8,14 @@ What is robot-jumpstarter?
 
 **robot-jumpstarter** helps you make NAOqi Applications, for the robots NAO and Pepper.
 
-Overview
+It's inspired by [Yeoman](http://yeoman.io/), and aims to be as useful for making NAOqi apps.
+
+It is aimed for making apps in **Python** and **Javascript**, as opposed to:
+
+* **Choregraphe** - for those, see [the official documentation](http://doc.aldebaran.com/2-4/software/choregraphe/)
+* **Android** - see [Pepper SDK for Android](https://android.aldebaran.com/doc/)
+
+Why?
 ========
 
 Making and testing NAOqi apps can be a bit of a pain. In an ideal world:
@@ -26,6 +33,11 @@ For example, calling
 `python jumpstart.py pythonapp my-super-app`
 
 ... will create a new project "my-super-app" containing a copy of the pythonapp template, with all necessary parts renamed.
+
+Installation
+========
+
+`git clone ....`
 
 
 Creating a project
@@ -119,13 +131,9 @@ Works like **python-service**, but with an extra collaborative dialogue file (a 
 
 This is again a common pattern: Anything needing computations or complex actions can be done by the service (in Python), the dialogue provides the interface (as opposed to putting the logic in qichat too, which is less readable, harder to debug, and makes it harder to handle several languages).
 
-Utility libraries
+See also
 ========
 
-The templates use libraries from the [Studio Toolkit](https://github.com/pepperhacking/studiotoolkit/), see there for documentation.
-
-More documentation
-========
-
+ * [The Official Python SDK documentation](http://doc.aldebaran.com/2-4/dev/python/).
+ * The [Studio Toolkit libraries](https://github.com/pepperhacking/studiotoolkit/), used in these templates (stk, and robotutils.js)
  * [Notes on "Services"](/doc/services)
-
