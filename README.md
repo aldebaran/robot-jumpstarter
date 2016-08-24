@@ -1,6 +1,12 @@
 Author(s): <ekroeger@aldebaran.com>
 
-Copyright (C) 2015 Aldebaran Robotics
+Copyright (C) 2015-2016 SBRE
+
+
+What is robot-jumpstarter?
+========
+
+**robot-jumpstarter** helps you make NAOqi Applications, for the robots NAO and Pepper.
 
 Overview
 ========
@@ -10,17 +16,16 @@ Making and testing NAOqi apps can be a bit of a pain. In an ideal world:
 * your essential logic should not be mixed up with cruft and boilerplate
 * you should be able to test your code in a matter of seconds, without any unnecessary steps
 
-**`skeleton-generator`** making it easier to start a new app or service from a template that takes care of these aspects. It contains:
+**`robot-jumpstarter`** makes it easy to start a new app or service from a template that takes care of these aspects. It contains:
 
-* Application template folders
-* A script for generating a new project from one of those
+* Application templates (folders)
+* A script for generating a new project from a template
 
 For example, calling 
 
 `python generate.py pythonapp my-super-app`
 
-... will create a new folder "my-super-app" containing a copy of the pythonapp template, with all necessary parts renamed.
-
+... will create a new project "my-super-app" containing a copy of the pythonapp template, with all necessary parts renamed.
 
 
 Creating a project
@@ -39,8 +44,10 @@ Application templates
 There are currently three basic templates:
 
 * **pythonapp**, a standalone Python script
+* **python-service**, a NAOqi service in Python
 * **simple-tabletpage**, a simple webpage
 * **service-tabletpage**, a Python service linked to a webpage
+* **dialog-service**, collaborative dialogue with a helper service
 
 You can also create your own template just by putting it in the "templates" folder.
 
@@ -55,22 +62,36 @@ An interactive application made as a simple standalone Python script.
 
 All the logic is in **`app/scripts/main.py`**.
 
-When the application is installed on the robot, running the behavior is equivalent to running main.py (the behavior will exit when main.py stops, and stopping the behavior will kill main.py).
+When the application is installed on the robot, running the behavior is equivalent to running `main.py` (the behavior will exit when main.py stops, and stopping the behavior will kill main.py).
 
-But for development, you can also run it in standalone on your computer;  pass the robot's address as parameter (**`python main.py --qi-url [your robot's IP]`**), or don't pass an address and you will interactively be asked for one (if you use qiq, it will offer to use your qiq default robot). This allows quicker iterations.
+But for development, you can also run it in standalone on your computer;  pass the robot's address as parameter (**`python main.py --qi-url [your robot's IP]`**), or don't pass an address and you will interactively be asked for one. This allows quicker iterations.
 
 If you build an application from this template, you should only have to change:
 
-* main.py (which can include other Python files)
+* `main.py` (which can include other Python files)
 * the project Properties, in Choregraphe (icon, description, trigger condition, supported languages, etc.)
 
 Note that this application doesn't register a service in NAOqi.
 
+Template: python-service
+--------
+
+*Usage:* `python generate.py python-service my-package-name MyServiceName`
+
+A NAOqi service that will be running at all times on your robot. 
+
+All the logic is in **`app/scripts/myservice.py`**. (it will be renamed by the generator script)
+
+As long as the application is installed on the robot, the service is present and can be called from anywhere with `MyServiceName.get()` (or whatever others you want to define).
+
+For development, as with the previous template, you can run it in standalone on your computer  (**`python main.py --qi-url [your robot's IP]`**), and you will still be able to call it as if it was running on the robot.
+
+This project also contains unit tests: run `python testrun.py` in the project root (this is experimental).
 
 Template: simple-tabletpage
 --------
 
-*Usage:* `python generate.py simple-tabletpage my-app-name`
+*Usage:* `python generate.py simple-tabletpage my-package-name`
 
 This demonstrates a simple way of having a webpage that uses NAOqi services by calling them with QiMessaging.js.
 
@@ -80,46 +101,31 @@ This template can be a good starting point for either making a webpage that can 
 
 To test the page without installing it on a robot, run `python serve.py` (in the app's root), and a new tab will be opened on your browser, in which you will be prompted to enter your robot's IP address, then given your app page as if it was installed on the robot (so you can use all your browser's debug facilities, and just reload the page when you edited your html/js/css).
 
+
 Template: service-tabletpage
 --------
 
-*Usage:* `python generate.py service-tabletpage my-app-name ALMyServiceName`
+*Usage:* `python generate.py service-tabletpage my-package-name MyServiceName`
 
-Combines the above two above to have an application consisting of a (Python) NAOqi service, and a webpage that calls it (which is a common pattern in application development).
+Combines **python-service** and **simple-tabletpage**  to have an application consisting of a (Python) NAOqi service, and a webpage that calls it (a common pattern in application development).
 
-The service will be started when the application is launched, and stopped with a call to it's .exit() method (that can be done from the webpage).
 
-This project also contains unit tests: run `python testrun.py` in the project root (this is experimental).
+Template: dialog-service
+--------
 
+*Usage:* `python generate.py service-tabletpage my-package-name MyServiceName`
+
+Works like **python-service**, but with an extra collaborative dialogue file (a qichat file, that can be edited through choregraphe), to show how you can call the service from dialogue.
+
+This is again a common pattern: Anything needing computations or complex actions can be done by the service (in Python), the dialogue provides the interface (as opposed to putting the logic in qichat too, which is less readable, harder to debug, and makes it harder to handle several languages).
 
 Utility libraries
 ========
 
-Python
---------
+The templates use libraries from the [Studio Toolkit](https://github.com/pepperhacking/studiotoolkit/), see there for documentation.
 
-See [the doc of Studio Libraries](doc/).
+More documentation
+========
 
+ * [Notes on "Services"](/doc/services)
 
-robotutils.js
---------
-
-A utility library for qimessaging.js (used in simple-tabletpage and service-tabletpage).
-
-Includes:
-
-* Support for remote debugging (as described in simple-tabletpage above) by running pages from your local computer.
-* Syntactic sugar:
-
-Getting services:
-
-    RobotUtils.onServices(function(ALLeds, ALTextToSpeech) {
-      ALLeds.randomEyes(2.0);
-      ALTextToSpeech.say("I can speak");
-    });
-
-Subscribing to ALMemory:
-
-    RobotUtils.subscribeToALMemoryEvent("FrontTactilTouched", function(value) {
-      alert("Head touched: " + value);
-    });
