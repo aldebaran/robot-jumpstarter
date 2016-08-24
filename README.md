@@ -37,8 +37,7 @@ For example, calling
 Installation
 ========
 
-`git clone ....`
-
+`git clone https://github.com/pepperhacking/robot-jumpstarter.git`
 
 Creating a project
 ========
