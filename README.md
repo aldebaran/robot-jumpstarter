@@ -15,6 +15,8 @@ It is aimed for making apps in **Python** and **Javascript**, as opposed to:
 * **Choregraphe** - for those, see [the official documentation](http://doc.aldebaran.com/2-4/software/choregraphe/)
 * **Android** - see [Pepper SDK for Android](https://android.aldebaran.com/doc/)
 
+Also note that unlike the above, this is not part of the "official" Softbank Robotics SDK, but rather a collection of useful shortcuts, examples and best practices.
+
 Why?
 ========
 
@@ -56,9 +58,11 @@ There are currently three basic templates:
 
 * **pythonapp**, a standalone Python script
 * **python-service**, a NAOqi service in Python
-* **simple-tabletpage**, a simple webpage
+* **simple-tabletpage**, a simple webpage, for Pepper's tablet
 * **service-tabletpage**, a Python service linked to a webpage
 * **dialog-service**, collaborative dialogue with a helper service
+* **simple-webpage-nao**, a simple webpage for Nao
+* **service-webpage-nao**, a Python service with a webpage for Nao
 
 You can also create your own template just by putting it in the "templates" folder.
 
@@ -112,6 +116,7 @@ This template can be a good starting point for either making a webpage that can 
 
 To test the page without installing it on a robot, run `python serve.py` (in the app's root), and a new tab will be opened on your browser, in which you will be prompted to enter your robot's IP address, then given your app page as if it was installed on the robot (so you can use all your browser's debug facilities, and just reload the page when you edited your html/js/css).
 
+Note that the html headers include a scale adjustment that ensures that one CSS pixel corresponds to one physical pixel on the tablet (so that e.g. if you want a full screen image, it should be 1280x800 pixels), to compensate for a scale added by Pepper's tablet browser (in NAOqi 2.5 and before). This also disabled user scaling on the page (most of the time, you don't want the user to be able to scale your page with his fingers).
 
 Template: service-tabletpage
 --------
@@ -129,6 +134,27 @@ Template: dialog-service
 Works like **python-service**, but with an extra collaborative dialogue file (a qichat file, that can be edited through choregraphe), to show how you can call the service from dialogue.
 
 This is again a common pattern: Anything needing computations or complex actions can be done by the service (in Python), the dialogue provides the interface (as opposed to putting the logic in qichat too, which is less readable, harder to debug, and makes it harder to handle several languages).
+
+
+Template: simple-webpage-nao
+--------
+
+*Usage:* `python jumpstart.py simple-tabletpage my-package-name`
+
+Basically the same as **simple-tabletpage** except:
+
+* The javascript uses the `robotutils.qim1.js` library, that provides the same API but is needed for NAOqi versions before 2.3
+* There is no behavior - it only provides as webpage you can access on http://(your NAO)/apps/my-package-name/
+* The page scale is not adjusted for Pepper's tablet
+
+
+Template: service-webpage-nao
+--------
+
+*Usage:* `python jumpstart.py service-webpage-nao my-package-name MyServiceName`
+
+Basically **service-tabletpage** adapted for nao (see **simple-webpage-nao** above).
+
 
 See also
 ========

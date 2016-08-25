@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- application css -->
+    <link media="screen" href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body class="unselectable">
+
+    <div class="tabletsized" >
+        <div id="buttons" class="centered" style="display:none">
+            <button class="levelbutton" data-level="0">zero</button>
+            <button class="levelbutton" data-level="1">one</button>
+            <button class="levelbutton" data-level="2">two</button>
+            <button class="levelbutton" data-level="3">three</button>
+        </div>
+        <div id="noservice" class="centered" style="display:none">
+            Service ALMyService not found :(
+        </div>
+    </div>
+    <!-- qimessaging & jquery stuff -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/robotutils.qim1.js"></script>
+    <script src="js/main.js"></script>
+    <!-- application script call -->
+    <script type="text/javascript">
+        $(document).ready(function(e){
+            var app = application();
+        })
+    </script>
+
+</body>
+</html>

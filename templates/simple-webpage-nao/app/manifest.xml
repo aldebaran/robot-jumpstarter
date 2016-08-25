@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.0.1" uuid="simple-webpage-nao">
+ <names>
+  <name lang="en_US">simple-webpage-nao</name>
+  <name lang="fr_FR">servicedriven</name>
+ </names>
+ <supportedLanguages>
+  <language>en_US</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents/>
+ <requirements>
+  <naoqiRequirement minVersion="2.3"/>
+  <robotRequirement/>
+ </requirements>
+ <services>
+  <service name="AppService" autorun="false" execStart="/usr/bin/python2 services/appservice.py"/>
+ </services>
+</package>

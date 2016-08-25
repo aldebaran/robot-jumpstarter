@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- application css -->
+    <link media="screen" href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body class="unselectable">
+
+    <div class="">
+        <button class="bleeper bigfriendlybutton">bleep</button>
+        <button class="bleeper bigfriendlybutton">bloop</button>
+        <button class="bleeper bigfriendlybutton">bidibip</button>
+    </div>
+    <!-- qimessaging & jquery stuff -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/robotutils.qim1.js"></script>
+    <script src="js/main.js"></script>
+    <!-- application script call -->
+    <script type="text/javascript">
+        $(document).ready(function(e){
+            var app = application();
+        })
+    </script>
+
+</body>
+</html>

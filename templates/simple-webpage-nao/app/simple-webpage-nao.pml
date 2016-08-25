@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Package name="simple-tabletpage" format_version="4">
+<Package name="simple-webpage-nao" format_version="4">
     <Manifest src="manifest.xml" />
-    <BehaviorDescriptions>
-        <BehaviorDescription name="behavior" src="." xar="behavior.xar" />
-    </BehaviorDescriptions>
+    <BehaviorDescriptions />
     <Dialogs />
     <Resources>
         <File name="style" src="html/css/style.css" />
