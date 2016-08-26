@@ -73,9 +73,11 @@ For more details:
 Template: pythonapp
 --------
 
-*Usage:* `python jumpstart.py pythonapp my-app-name`
-
 An interactive application made as a simple standalone Python script.
+
+*Ideal for:*: A game, a utility (diagnosis/cleanup) script, etc.
+
+*Usage:* `python jumpstart.py pythonapp my-app-name`
 
 All the logic is in **`app/scripts/main.py`**.
 
@@ -93,9 +95,11 @@ Note that this application doesn't register a service in NAOqi.
 Template: python-service
 --------
 
-*Usage:* `python jumpstart.py python-service my-package-name MyServiceName`
-
 A NAOqi service that will be running at all times on your robot. 
+
+*Ideal for:*: A bundle of helper function used by your other apps, A background service monitoring your robot's state and notifying your web server, etc.
+
+*Usage:* `python jumpstart.py python-service my-package-name MyServiceName`
 
 All the logic is in **`app/scripts/myservice.py`**. (it will be renamed by the generator script)
 
@@ -108,13 +112,13 @@ This project also contains unit tests: run `python testrun.py` in the project ro
 Template: simple-tabletpage
 --------
 
+A webpage that uses NAOqi services by calling them with QiMessaging.js.
+
+*Ideal for:*: A diagnosis webpage, an utility for controling your robot, a javascript game on the tablet, a configuration page, a helper for testing (e.g. text to speech), etc.
+
 *Usage:* `python jumpstart.py simple-tabletpage my-package-name`
 
-This demonstrates a simple way of having a webpage that uses NAOqi services by calling them with QiMessaging.js.
-
 It also contains a behavior, who, when run on Pepper, will require that webpage to be displayed on her tablet.
-
-This template can be a good starting point for either making a webpage that can be opened on the robot (for debug or configuration purposes, e.g. testing text to speech), or for making a simple tablet-driven animation.
 
 To test the page without installing it on a robot, run `python serve.py` (in the app's root), and a new tab will be opened on your browser, in which you will be prompted to enter your robot's IP address, then given your app page as if it was installed on the robot (so you can use all your browser's debug facilities, and just reload the page when you edited your html/js/css).
 
@@ -123,6 +127,10 @@ Note that the html headers include a scale adjustment that ensures that one CSS 
 Template: service-tabletpage
 --------
 
+A webpage backed by a custom service.
+
+*Ideal for:*: An app/game that displays rich content on the tablet, an advance diagnosis webpage, etc.
+
 *Usage:* `python jumpstart.py service-tabletpage my-package-name MyServiceName`
 
 Combines **python-service** and **simple-tabletpage**  to have an application consisting of a (Python) NAOqi service, and a webpage that calls it (a common pattern in application development).
@@ -130,6 +138,10 @@ Combines **python-service** and **simple-tabletpage**  to have an application co
 
 Template: dialog-service
 --------
+
+A collaborative dialogue linked to a service.
+
+*Ideal for:*: An "intelligent" dialogue with complex logic, a dialogue linked to a web service, etc.
 
 *Usage:* `python jumpstart.py dialog-service my-package-name MyServiceName`
 
@@ -140,6 +152,10 @@ This is again a common pattern: Anything needing computations or complex actions
 
 Template: simple-webpage-nao
 --------
+
+A webpage for nao.
+
+*Ideal for:*: Diagnosis info, a remote control.
 
 *Usage:* `python jumpstart.py simple-webpage-nao my-package-name`
 
@@ -152,6 +168,10 @@ Basically the same as **simple-tabletpage** except:
 
 Template: service-webpage-nao
 --------
+
+A webpage linked to a service for nao.
+
+*Ideal for:*: A utility service and it's debug page, a rich remote control, etc.
 
 *Usage:* `python jumpstart.py service-webpage-nao my-package-name MyServiceName`
 
