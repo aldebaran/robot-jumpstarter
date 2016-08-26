@@ -1,5 +1,17 @@
 #!/usr/bin/python
 # PYTHON_ARGCOMPLETE_OK
+"""
+jumpstart.py
+
+A script for generating a NAOqi project from a tamplate folder.
+"""
+
+__version__ = "0.1.1"
+
+__copyright__ = "Copyright 2015-2016, SBRE"
+__author__ = 'ekroeger'
+__email__ = 'ekroeger@aldebaran.com'
+
 import os
 import shutil
 import re
@@ -74,11 +86,11 @@ def generate(sourcename, destname, servicename=None):
     rename_in_folder(destpath, sourcename, destname)
 
     if servicename:
-        if servicename.startswith("AL"):
-            scriptname = servicename[2:].lower()
-        else:
-            scriptname = servicename.lower()
-            servicename = "AL" + servicename.capitalize()
+        # script name (used by ALServiceManager) should be underscore
+        scriptname = servicename.lower()
+        # service name (used in ServiceDirectory) should be capitalized
+        if not servicename[0].isupper():
+            servicename = servicename.capitalize()
         rename_in_folder(destpath, "ALMyService", servicename)
         rename_in_folder(destpath, "myservice", scriptname)
 
