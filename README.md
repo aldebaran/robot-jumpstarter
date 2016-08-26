@@ -41,6 +41,8 @@ Installation
 
 `git clone https://github.com/pepperhacking/robot-jumpstarter.git`
 
+You will also need a working NAOqi Python SDK - see [the installation guide](http://doc.aldebaran.com/2-4/dev/python/install_guide.html).
+
 Creating a project
 ========
 
@@ -129,7 +131,7 @@ Combines **python-service** and **simple-tabletpage**  to have an application co
 Template: dialog-service
 --------
 
-*Usage:* `python jumpstart.py service-tabletpage my-package-name MyServiceName`
+*Usage:* `python jumpstart.py dialog-service my-package-name MyServiceName`
 
 Works like **python-service**, but with an extra collaborative dialogue file (a qichat file, that can be edited through choregraphe), to show how you can call the service from dialogue.
 
@@ -139,7 +141,7 @@ This is again a common pattern: Anything needing computations or complex actions
 Template: simple-webpage-nao
 --------
 
-*Usage:* `python jumpstart.py simple-tabletpage my-package-name`
+*Usage:* `python jumpstart.py simple-webpage-nao my-package-name`
 
 Basically the same as **simple-tabletpage** except:
 
@@ -161,4 +163,4 @@ See also
 
  * [The Official Python SDK documentation](http://doc.aldebaran.com/2-4/dev/python/).
  * The [Studio Toolkit libraries](https://github.com/pepperhacking/studiotoolkit/), used in these templates (stk, and robotutils.js)
- * [Notes on "Services"](/doc/services)
+ * [Notes on "Services"](/doc/services.md), an attempt to clarify some terminological confusion
