@@ -4,7 +4,7 @@ stk.services.py
 Syntactic sugar for accessing NAOqi services.
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __copyright__ = "Copyright 2015, Aldebaran Robotics"
 __author__ = 'ekroeger'
@@ -29,8 +29,11 @@ class ServiceCache(object):
         if (not servicename in self.services) or (
                 servicename == "ALTabletService"):
             # ugly hack: never cache ALtabletService, always ask for a new one
+            if servicename.startswith("__"):
+                # Behave like a normal python object for those
+                raise AttributeError
             try:
                 self.services[servicename] = self.session.service(servicename)
-            except RuntimeError: # Cannot find service
+            except RuntimeError:  # Cannot find service
                 self.services[servicename] = None
         return self.services[servicename]

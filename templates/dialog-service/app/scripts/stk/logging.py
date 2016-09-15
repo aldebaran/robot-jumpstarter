@@ -15,6 +15,7 @@ import traceback
 
 import qi
 
+
 def get_logger(session, app_id):
     """Returns a qi logger object."""
     logger = qi.logging.Logger(app_id)
@@ -30,6 +31,7 @@ def get_logger(session, app_id):
         # old version of NAOqi - logging will probably not work.
         pass
     return logger
+
 
 def log_exceptions(func):
     """Catches all exceptions in decorated method, and prints them.

@@ -8,7 +8,7 @@ Python SDK, these helper functions just isolate some frequently used/hairy
 bits so you don't have them mixed in your logic.
 """
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 __copyright__ = "Copyright 2015, Aldebaran Robotics"
 __author__ = 'ekroeger'
@@ -16,6 +16,7 @@ __email__ = 'ekroeger@aldebaran.com'
 
 import sys
 import qi
+from distutils.version import LooseVersion
 
 #
 # Helpers for making sure we have a robot to connect to
@@ -29,7 +30,7 @@ def check_commandline_args(description):
     parser.add_argument('--qi-url', help='connect to specific NAOqi instance')
 
     args = parser.parse_args()
-    return bool(args.qi_url)
+    return args
 
 
 def is_on_robot():
@@ -62,18 +63,31 @@ def init(qi_url=None):
     "Returns a QiApplication object, possibly with interactive input."
     if qi_url:
         sys.argv.extend(["--qi-url", qi_url])
-    elif check_commandline_args('Run the app.'):
-        pass
-    elif not is_on_robot():
-        print "no --qi-url parameter given; interactively getting debug robot."
-        debug_robot = get_debug_robot()
-        if debug_robot:
-            sys.argv.extend(["--qi-url", debug_robot])
-        else:
-            raise RuntimeError("No robot, not running.")
-    # In some environments sys.argv[0] has unicode, which qi rejects
+    else:
+        args = check_commandline_args('Run the app.')
+        if bool(args.qi_url):
+            qi_url = args.qi_url
+        elif not is_on_robot():
+            print "no --qi-url parameter given; interactively getting debug robot."
+            debug_robot = get_debug_robot()
+            if debug_robot:
+                sys.argv.extend(["--qi-url", debug_robot])
+                qi_url = debug_robot
+            else:
+                raise RuntimeError("No robot, not running.")
+
+    qiapp = None
     sys.argv[0] = str(sys.argv[0])
-    qiapp = qi.Application()
+
+    # In versions bellow 2.3, look for --qi-url in the arguemnts and call accordingly the Application
+    if qi_url and  LooseVersion(qi.__version__) < LooseVersion("2.3"):
+        position = 0
+        qiapp = qi.Application(url="tcp://"+qi_url+":9559")
+    # In versions greater than 2.3 the ip can simply be passed through argv[0]
+    else:
+        # In some environments sys.argv[0] has unicode, which qi rejects
+        qiapp = qi.Application()
+
     qiapp.start()
     return qiapp
 

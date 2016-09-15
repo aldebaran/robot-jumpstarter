@@ -13,6 +13,7 @@ __email__ = 'ekroeger@aldebaran.com'
 
 import qi
 
+
 def on(*keys):
     """Decorator for connecting a callback to one or several events.
 
@@ -34,6 +35,7 @@ def on(*keys):
         func.__event_keys__ = keys
         return func
     return decorator
+
 
 class EventHelper(object):
     "Helper for ALMemory; takes care of event connections so you don't have to"
