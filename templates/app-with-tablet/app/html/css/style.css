@@ -1,0 +1,35 @@
+* {
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body{
+  margin: 0px;
+  background-color: black;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.tabletsized {
+  background-color: lightblue;
+  width: 1280px;
+  height: 800px;
+  position: absolute;
+}
+
+#exit {
+  font-size: 100px;
+  position: absolute;
+  top: 0px;
+  right: 15px;
+}
+
+#biglabel {
+    font-size: 300px;
+}
