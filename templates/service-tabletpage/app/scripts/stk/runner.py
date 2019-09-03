@@ -80,8 +80,7 @@ def init(qi_url=None):
     sys.argv[0] = str(sys.argv[0])
 
     # In versions bellow 2.3, look for --qi-url in the arguemnts and call accordingly the Application
-    if qi_url and  LooseVersion(qi.__version__) < LooseVersion("2.3"):
-        position = 0
+    if qi_url and hasattr(qi, "__version__") and LooseVersion(qi.__version__) < LooseVersion("2.3"):
         qiapp = qi.Application(url="tcp://"+qi_url+":9559")
     # In versions greater than 2.3 the ip can simply be passed through argv[0]
     else:
